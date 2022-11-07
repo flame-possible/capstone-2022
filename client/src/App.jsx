@@ -243,7 +243,7 @@ export default function App({block_list, transactionInstance, account}) {
               <Route path="/writetransaction" element={<WriteTransaction transactionInstance={transactionInstance} account={account} />}/>
               <Route path="/admin" element={<Admin transactionInstance={transactionInstance}/>} />
               <Route path="/rejectedTransaction" element={<RejectedTransaction transactionInstance={transactionInstance}/>} />
-              <Route path="/grantTransaction" element={<GrantTransaction transactionInstance={transactionInstance}/>} />
+              <Route path="/grantTransaction" element={<GrantTransaction transactionInstance={transactionInstance} account={account}/>} />
             </Routes>
             <br></br><br></br>
             {<MainFooter />}

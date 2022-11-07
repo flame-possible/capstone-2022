@@ -9,25 +9,45 @@ import {
   NavItem,
   NavLink
 } from "shards-react";
+import axios from 'axios';
 
 export default class UserActions extends React.Component {
 
   // const [user_name, setUser_name] = useState("");
 
+
   constructor(props) {
     super(props);
 
     this.state = {
-      visible: false
+      visible: false,
+      totalReactPackages: 2
     };
 
     this.toggleUserActions = this.toggleUserActions.bind(this);
+    
+    
   }
+  
+  // async componentDidMount() {
+  // }
+  
+
 
   toggleUserActions() {
     this.setState({
       visible: !this.state.visible
     });
+
+    axios.get('http://localhost:3001/api/check_request_receive_num')
+    .then(response => {
+      
+      const posts = response.data[0].total;
+      this.setState({ totalReactPackages: posts });
+    });
+
+    console.log(this.state.totalReactPackages)
+
   }
 
   log_out(){
@@ -68,6 +88,8 @@ export default class UserActions extends React.Component {
 
 
   render() {
+    const { totalReactPackages } = this.state;
+
     if (sessionStorage.getItem('user_id') == 'admin'){
       return (<NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
                 <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
@@ -94,8 +116,10 @@ export default class UserActions extends React.Component {
                     <i className="material-icons text-danger">&#xE879;</i> Logout
                   </DropdownItem>
                   <DropdownItem tag={Link} to="/rejectedTransaction">
-                    <i className="material-icons text-danger">notifications</i> 알람
+                    <i className="material-icons text-danger">notifications</i> 알람 
+                    {totalReactPackages}
                   </DropdownItem>
+
                 </Collapse>
               </NavItem>
               )
@@ -111,6 +135,7 @@ export default class UserActions extends React.Component {
                   </DropdownItem>
                   <DropdownItem tag={Link} to="/grantTransaction">
                     <i className="material-icons text-danger">notifications</i> 알람
+                    {totalReactPackages}
                   </DropdownItem>
                 </Collapse>
               </NavItem>

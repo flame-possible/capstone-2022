@@ -150,7 +150,7 @@ const preUpload = (e) => {
       temp += target[i];
     }
     
-    var fileurl = 'https://ipfs.infura.io/ipfs/' + temp;
+    var fileurl = 'https://ipfs.infura.io/ipfs/' + ipfsHash;
 
     Axios.post('http://localhost:3001/api/insert_docu', null, {
         params: {
@@ -162,6 +162,7 @@ const preUpload = (e) => {
         'ipfs_hash': fileurl,
         'registrant': Regsitrant,
         'responsible_manager': Responsible,
+        'file_type': temp,
         'file_des': Filedes,
         'request_user_check': 0,
         'receive_user_check': 0
@@ -348,8 +349,8 @@ const preUpload = (e) => {
                 <CustomFileUpload />
 
                 {uploadbutton()}
-                {/* <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_docu}>트랜잭션 업로드</Button> */}
-                <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendTransaction}>트랜잭션 업로드</Button>
+                <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_docu}>트랜잭션 업로드</Button>
+                {/* <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendTransaction}>트랜잭션 업로드</Button> */}
               </div>
             )}
 
