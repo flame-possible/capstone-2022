@@ -21,7 +21,8 @@ export default class UserActions extends React.Component {
 
     this.state = {
       visible: false,
-      totalReactPackages: 2
+      totalReactPackages: 0,
+      totalReactPackages_: 0
     };
 
     this.toggleUserActions = this.toggleUserActions.bind(this);
@@ -39,11 +40,18 @@ export default class UserActions extends React.Component {
       visible: !this.state.visible
     });
 
-    axios.get('http://localhost:3001/api/check_request_receive_num')
+    axios.get('http://localhost:3001/api/check_request_num')
     .then(response => {
       
       const posts = response.data[0].total;
       this.setState({ totalReactPackages: posts });
+    });
+    
+    axios.get('http://localhost:3001/api/check_receive_num')
+    .then(response => {
+      
+      const posts = response.data[0].total;
+      this.setState({ totalReactPackages_: posts });
     });
 
     console.log(this.state.totalReactPackages)
@@ -89,6 +97,7 @@ export default class UserActions extends React.Component {
 
   render() {
     const { totalReactPackages } = this.state;
+    const { totalReactPackages_ } = this.state;
 
     if (sessionStorage.getItem('user_id') == 'admin'){
       return (<NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
@@ -135,7 +144,7 @@ export default class UserActions extends React.Component {
                   </DropdownItem>
                   <DropdownItem tag={Link} to="/grantTransaction">
                     <i className="material-icons text-danger">notifications</i> 알림 &nbsp;
-                    <a style={{color: 'red'}}>{totalReactPackages}</a>
+                    <a style={{color: 'red'}}>{totalReactPackages_}</a>
                   </DropdownItem>
                 </Collapse>
               </NavItem>

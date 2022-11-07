@@ -227,9 +227,35 @@ app.post("/api/fail_request", (req, res)=>{
     })
 })
 
-app.get("/api/check_request_receive_num", (req, res)=>{
+app.post("/api/request_check_alarm", (req, res)=>{
     
-    const sql1 = 'SELECT count(*) as total FROM request WHERE receive_user_check = 0'
+    const time_stamp = req.query.time_stamp;
+    
+    const sql1 = 'UPDATE request SET receive_user_check = 1, request_user_check = 0 WHERE time_stamp = ?'
+    db.query(sql1, [time_stamp], (err, data) => {
+        if(!err) {
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+})
+
+app.get("/api/check_request_num", (req, res)=>{
+    
+    const sql1 = 'SELECT count(*) as total FROM request WHERE request_user_check = 1'
+    db.query(sql1, (err, data) => {
+        if(!err) {
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+})
+
+app.get("/api/check_receive_num", (req, res)=>{
+    
+    const sql1 = 'SELECT count(*) as total FROM request WHERE receive_user_check = 0 and request_user_check = 0'
     db.query(sql1, (err, data) => {
         if(!err) {
             res.send(data)

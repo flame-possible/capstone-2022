@@ -34,6 +34,20 @@ function RejectedTransaction({transactionInstance, account}){
   const detail_click = (cnt) => {
     setDetail(true);
     setDetailcnt(cnt);
+    if (block_list[cnt].request_user_check == 1 && block_list[cnt].receive_user_check == 1){
+      
+      axios.post('http://localhost:3001/api/request_check_alarm', null, {
+        
+        params: {
+          'time_stamp': block_list[cnt].time_stamp
+          }
+      })
+      .then(async res => {
+        console.log(res)    
+
+      })
+      .catch()
+    }
   }
 
   const rejectOrNot = (e) => {
@@ -172,6 +186,7 @@ function RejectedTransaction({transactionInstance, account}){
                 <td>{child[i].file_type}</td>
                 <td>{child[i].file_des}</td>
                 <td>{child[i].time_stamp}</td>
+                <td>{child[i].check}</td>
               </tr>
               )
           }
@@ -184,6 +199,7 @@ function RejectedTransaction({transactionInstance, account}){
                 <td>{child[i].file_type}</td>
                 <td>{child[i].file_des}</td>
                 <td>{child[i].time_stamp}</td>
+                <td>{child[i].check}</td>
               </tr>
               )
           }
@@ -243,6 +259,9 @@ function RejectedTransaction({transactionInstance, account}){
                       </th>
                       <th scope="col" className="border-0">
                         Upload Time
+                      </th>
+                      <th scope="col" className="border-0">
+                        확인 여부
                       </th>
                     </tr>
                   </thead>
@@ -717,37 +736,49 @@ function RejectedTransaction({transactionInstance, account}){
     
           for(let i = 0; i < res.data.length; i++){
                
+              let temp = "미확인";
 
-              
-              block_list.push({
-                id: nextId.current,
-                request_user : res.data[i].request_user,
-                receive_user : res.data[i].receive_user,
-                category : res.data[i].category,
-                name : res.data[i].name,
-                time_stamp : res.data[i].time_stamp,
-                file_des : res.data[i].file_des,
-                checktype : res.data[i].check_type,
-                file_type : res.data[i].file_type,
-                ipfsHash : res.data[i].ipfs_hash,
-                des1 : res.data[i].des1,
-                des2 : res.data[i].des2,
-                des3 : res.data[i].des3,
-      
-                des4 : res.data[i].des4,
-                des5 : res.data[i].des5,
-                des6 : res.data[i].des6,
-                des7 : res.data[i].des7,
-                des8 : res.data[i].des8,
-                des9 : res.data[i].des9,
-                des10 : res.data[i].des10,
-                registrant : res.data[i].registrant,
-                responsible : res.data[i].responsible_manager,
-                comment : res.data[i].receive_comment,
+              if (res.data[i].request_user_check == 1 && res.data[i].receive_user_check == 1){
+                temp = "미확인";
               }
-              )
-              
-              nextId.current += 1;
+              else if (res.data[i].request_user_check == 0 && res.data[i].receive_user_check == 1){
+                temp = "확인";
+              }
+
+              if(!(res.data[i].request_user_check == 0 && res.data[i].receive_user_check == 0)){
+
+                block_list.push({
+                  id: nextId.current,
+                  request_user : res.data[i].request_user,
+                  receive_user : res.data[i].receive_user,
+                  category : res.data[i].category,
+                  name : res.data[i].name,
+                  time_stamp : res.data[i].time_stamp,
+                  file_des : res.data[i].file_des,
+                  checktype : res.data[i].check_type,
+                  file_type : res.data[i].file_type,
+                  ipfsHash : res.data[i].ipfs_hash,
+                  des1 : res.data[i].des1,
+                  des2 : res.data[i].des2,
+                  des3 : res.data[i].des3,
+        
+                  des4 : res.data[i].des4,
+                  des5 : res.data[i].des5,
+                  des6 : res.data[i].des6,
+                  des7 : res.data[i].des7,
+                  des8 : res.data[i].des8,
+                  des9 : res.data[i].des9,
+                  des10 : res.data[i].des10,
+                  registrant : res.data[i].registrant,
+                  responsible : res.data[i].responsible_manager,
+                  comment : res.data[i].receive_comment,
+                  check : temp,
+                  request_user_check : res.data[i].request_user_check,
+                  receive_user_check : res.data[i].receive_user_check,
+                })
+
+                nextId.current += 1;
+              }
 
             
 
