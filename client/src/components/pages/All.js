@@ -576,6 +576,7 @@ function All({transactionInstance}){
             id: nextId.current,
             category : events[i].returnValues.category.toString(),
             name : events[i].returnValues.name.toString(),
+            // time : time_,
             time : time_.toString(), 
             ipfsHash : fileurl,
             registrant : events[i].returnValues.registrant.toString(),
@@ -614,6 +615,7 @@ function All({transactionInstance}){
             id: nextId.current,
             category : events_[i].returnValues.category.toString(),
             checktype : events_[i].returnValues.checktype.toString(),
+            // time : time_,
             time : time_.toString(), 
             des1 : temp_des[0],
             des2 : temp_des[1],
@@ -635,6 +637,34 @@ function All({transactionInstance}){
   
           console.log(events_[i].returnValues);
         }
+
+        
+        let i, j;
+
+        // for(i = 0; i < block_list.length; i++){
+          
+        //   let temp_list;
+        //   let temp_list_cnt = -1;
+
+        //   for(j = i+1; j < block_list.length; j++){
+        //     if(block_list[i].time._i < block_list[j].time._i){
+        //       temp_list = block_list[j];
+        //       temp_list_cnt = j;
+        //     }
+        //   }
+
+        //   if(temp_list_cnt != -1){
+        //     block_list[temp_list_cnt] = block_list[i];
+        //     block_list[i] = temp_list;
+        //   }
+
+        // }
+        
+        // for(i = 0; i < block_list.length; i++){
+          
+        //   block_list.time = block_list.time.toString();
+
+        // }
 
         setLoading(true);
         setFirst(true);
