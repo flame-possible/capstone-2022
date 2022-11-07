@@ -1,4 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
+import moment from 'moment';
+// 안써도 자동으로 한국 시간을 불러온다. 명확하게 하기 위해 import
+import 'moment/locale/ko';
 
 import {
   ListGroup,
@@ -13,6 +16,10 @@ import {
   Button
 } from "shards-react";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
+
+
+import Axios from 'axios';
+
 // const ipfsClient = require('ipfs-http-client');
 
 const projectId = '2DCS0fCRlt3GtE33WGUMaHo05dI';
@@ -84,6 +91,7 @@ const preUpload = (e) => {
     }
 }
 
+  // send 전자문서 블록체인
   const sendTransaction = async (e) => {
 
     let cnt = file.name.length;
@@ -108,6 +116,104 @@ const preUpload = (e) => {
     //this.updateAllTransactions();
     window.location.replace("/")
     // submitReview();
+  }
+  
+  // send 체크리스트 블록체인
+  const sendChecklistTransaction = async (e) => {
+    await transactionInstance.sendCheckTrans(CategorySelect, CheckListType, Regsitrant, Responsible, des, {
+      from: account,
+      //value: e.web3.utils.toWei('10', "ether"),
+      gas: 1000000
+    })
+    
+    let events = await transactionInstance.getPastEvents('checkTransaction', {fromBlock: 0, toBlock:'latest'});
+    console.log(events)
+    //this.updateAllTransactions();
+    window.location.replace("/")
+    // submitReview();
+}
+
+  // send 전자문서 db
+  const onClick_send_db_docu = () => {
+
+    const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+    
+    
+    let cnt = file.name.length;
+    let target = '';
+    for(let i = cnt-1; i > 0; i-- ){
+      target += file.name[i];
+      if(file.name[i] == '.') break;
+    }
+    let temp = '';
+    for(let i = target.length-2; i >= 0; i--){
+      temp += target[i];
+    }
+    
+    var fileurl = 'https://ipfs.infura.io/ipfs/' + ipfsHash;
+
+    Axios.post('http://localhost:3001/api/insert_docu', null, {
+        params: {
+        'request_user': sessionStorage.getItem('user_id'),
+        'receive_user': "bbb",
+        'category': CategorySelect,
+        'name': Filename,
+        'time_stamp': nowTime,
+        'ipfs_hash': fileurl,
+        'registrant': Regsitrant,
+        'responsible_manager': Responsible,
+        'file_type': temp,
+        'file_des': Filedes,
+        'request_user_check': 0,
+        'receive_user_check': 0
+        }
+    })
+    .then(res => {
+    
+      console.log(res)
+      alert('등록 완료')
+      document.location.href = '/'
+    })
+    .catch()
+  }
+
+  
+  // send 체크리스트 db
+  const onClick_send_db_check = () => {
+
+    const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+    
+
+    Axios.post('http://localhost:3001/api/insert_check', null, {
+        params: {
+        'request_user': sessionStorage.getItem('user_id'),
+        'receive_user': "bbb",
+        'category': CategorySelect,
+        'check_type': CheckListType,
+        'time_stamp': nowTime,
+        'registrant': Regsitrant,
+        'responsible_manager': Responsible,
+        'des1': des[0],
+        'des2': des[1],
+        'des3': des[2],
+        'des4': des[3],
+        'des5': des[4],
+        'des6': des[5],
+        'des7': des[6],
+        'des8': des[7],
+        'des9': des[8],
+        'des10': des[9],
+        'request_user_check': 0,
+        'receive_user_check': 0
+        }
+    })
+    .then(res => {
+    
+      console.log(res)
+      alert('등록 완료')
+      document.location.href = '/'
+    })
+    .catch()
   }
   
   const category_select = (e) => {
@@ -145,19 +251,6 @@ const preUpload = (e) => {
   }
 
 
-  const sendChecklistTransaction = async (e) => {
-    await transactionInstance.sendCheckTrans(CategorySelect, CheckListType, Regsitrant, Responsible, des, {
-      from: account,
-      //value: e.web3.utils.toWei('10', "ether"),
-      gas: 1000000
-    })
-    
-    let events = await transactionInstance.getPastEvents('checkTransaction', {fromBlock: 0, toBlock:'latest'});
-    console.log(events)
-    //this.updateAllTransactions();
-    window.location.replace("/")
-    // submitReview();
-}
 
 
   const CustomFileUpload = () => {
@@ -256,7 +349,8 @@ const preUpload = (e) => {
                 <CustomFileUpload />
 
                 {uploadbutton()}
-                <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendTransaction}>트랜잭션 업로드</Button>
+                <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_docu}>트랜잭션 업로드</Button>
+                {/* <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendTransaction}>트랜잭션 업로드</Button> */}
               </div>
             )}
 
@@ -341,7 +435,8 @@ const preUpload = (e) => {
                       <FormRadio inline name="construct10" onChange={() => {des[9] = 1}}>예</FormRadio>     
                       <FormRadio inline name="construct10" onChange={() => {des[9] = 0}}>아니요</FormRadio>
                       <br></br>
-                      <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendChecklistTransaction}>트랜잭션 업로드</Button>
+                      {/* <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_check}>트랜잭션 업로드</Button> */}
+                      <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_check}>트랜잭션 업로드</Button>
                     </div>
                   )}
                   {CheckListType == "Welding" && (
@@ -413,7 +508,8 @@ const preUpload = (e) => {
                       <FormRadio inline name="welding10" onChange={() => {des[9] = 1}}>예</FormRadio>     
                       <FormRadio inline name="welding10" onChange={() => {des[9] = 0}}>아니요</FormRadio>
                       <br></br>
-                      <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendChecklistTransaction}>트랜잭션 업로드</Button>
+                      {/* <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_check}>트랜잭션 업로드</Button> */}
+                      <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_check}>트랜잭션 업로드</Button>
                     </div>
                   )}
                   {CheckListType == "Electricity" && (
@@ -485,7 +581,8 @@ const preUpload = (e) => {
                       <FormRadio inline name="elec10" onChange={() => {des[9] = 1}}>예</FormRadio>     
                       <FormRadio inline name="elec10" onChange={() => {des[9] = 0}}>아니요</FormRadio>
                       <br></br>
-                      <Button outline theme="secondary" className="mb-2 mr-1" onClick={sendChecklistTransaction}>트랜잭션 업로드</Button>
+                      {/* <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_check}>트랜잭션 업로드</Button> */}
+                      <Button outline theme="secondary" className="mb-2 mr-1" onClick={onClick_send_db_check}>트랜잭션 업로드</Button>
                     </div>
                   )}
 

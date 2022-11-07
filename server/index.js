@@ -120,12 +120,124 @@ app.post('/sendCCTV', (req, res) => {
     const sql1 = 'SELECT * FROM cctv'
     db.query(sql1, (err, data) => {
         if(!err) {
+            const sql2 = 'DELETE FROM cctv'
+            db.query(sql2, (err) => {})
             res.send(data)
         } else {
             res.send(err)
         }
     })
 });
+
+app.post("/api/insert_check", (req, res)=>{
+    const request_user = req.query.request_user;
+    const receive_user = req.query.receive_user;
+    const category = req.query.category;
+    
+    const check_type = req.query.check_type;
+    const time_stamp = req.query.time_stamp;
+    const registrant = req.query.registrant;
+    const responsible_manager = req.query.responsible_manager;
+    const des1 = req.query.des1;
+    const des2 = req.query.des2;
+    const des3 = req.query.des3;
+    const des4 = req.query.des4;
+    const des5 = req.query.des5;
+    const des6 = req.query.des6;
+    const des7 = req.query.des7;
+    const des8 = req.query.des8;
+    const des9 = req.query.des9;
+    const des10 = req.query.des10;
+    const request_user_check = req.query.request_user_check;
+    const receive_user_check = req.query.receive_user_check;
+
+
+
+    const sqlQuery = "INSERT INTO request (request_user, receive_user, category, check_type, time_stamp, registrant, responsible_manager, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, request_user_check, receive_user_check) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlQuery, [request_user, receive_user, category, check_type, time_stamp, registrant, responsible_manager, des1, des2, des3, des4, des5, des6, des7, des8, des9, des10, request_user_check, receive_user_check], (err, result)=>{
+        res.send('success!');
+    });
+})
+
+app.post("/api/insert_docu", (req, res)=>{
+    const request_user = req.query.request_user;
+    const receive_user = req.query.receive_user;
+    const category = req.query.category;
+    const name = req.query.name;
+    
+    const time_stamp = req.query.time_stamp;
+    const ipfs_hash = req.query.ipfs_hash;
+    const registrant = req.query.registrant;
+    const responsible_manager = req.query.responsible_manager;
+    const file_type = req.query.file_type;
+    const file_des = req.query.file_des;
+
+    const request_user_check = req.query.request_user_check;
+    const receive_user_check =req.query.receive_user_check;
+
+
+    const sqlQuery = "INSERT INTO request (request_user, receive_user, category, name, time_stamp, ipfs_hash, registrant, responsible_manager, file_type, file_des, request_user_check, receive_user_check) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlQuery, [request_user, receive_user, category, name, time_stamp, ipfs_hash, registrant, responsible_manager, file_type, file_des, request_user_check, receive_user_check], (err, result)=>{
+        res.send('success!');
+    });
+})
+
+
+app.post("/api/select_request", (req, res)=>{
+    
+    const sql1 = 'SELECT * FROM request'
+    db.query(sql1, (err, data) => {
+        if(!err) {
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+})
+
+
+app.post("/api/success_request", (req, res)=>{
+    
+    const time_stamp = req.query.time_stamp;
+    
+    const sql1 = 'UPDATE request SET success = 1, receive_user_check = 1, request_user_check = 1 WHERE time_stamp = ?'
+    db.query(sql1, [time_stamp], (err, data) => {
+        if(!err) {
+            const sql2 = 'DELETE FROM request where time_stamp = ?'
+            db.query(sql2, [time_stamp], (err) => {})
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+})
+
+app.post("/api/fail_request", (req, res)=>{
+    
+    const comment = req.query.comment;
+    const time_stamp = req.query.time_stamp;
+    
+    const sql1 = 'UPDATE request SET success = 0, receive_user_check = 1, request_user_check = 1, receive_comment = ? WHERE time_stamp = ?'
+    db.query(sql1, [comment, time_stamp], (err, data) => {
+        if(!err) {
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+})
+
+app.get("/api/check_request_receive_num", (req, res)=>{
+    
+    const sql1 = 'SELECT count(*) as total FROM request WHERE receive_user_check = 0'
+    db.query(sql1, (err, data) => {
+        if(!err) {
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+})
 
 app.listen(PORT, ()=>{
     console.log(`running on port ${PORT}`);
