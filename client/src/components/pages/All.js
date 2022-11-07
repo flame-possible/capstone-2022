@@ -65,7 +65,7 @@ function All({transactionInstance}){
                 <td>{child[i].responsible}</td>
                 <td>{child[i].filetype}</td>
                 <td>{child[i].filedes}</td>
-                <td>{child[i].time}</td>
+                <td>{child[i].real_time}</td>
               </tr>
               )
           }
@@ -77,7 +77,7 @@ function All({transactionInstance}){
                 <td>{child[i].responsible}</td>
                 <td>{child[i].filetype}</td>
                 <td>{child[i].filedes}</td>
-                <td>{child[i].time}</td>
+                <td>{child[i].real_time}</td>
               </tr>
               )
           }
@@ -159,28 +159,6 @@ function All({transactionInstance}){
       )
     }
     else if ((detail && first)){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      
-      return (
-        
-        <Row>
-          <Col lg="7" md="12">
-          <Card small>
-          <CardHeader className="border-bottom">
-            <h6 className="m-0">Form</h6>
-          </CardHeader>
-            <ListGroup flush>
-            <ListGroupItem className="p-3">
-              <Row>
-                <Col>
-                      <label htmlFor="feInputState">카테고리</label>
-=======
-=======
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
-=======
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
 
       if(block_list[detailcnt].checktype == "Electricity"){
 
@@ -237,36 +215,6 @@ function All({transactionInstance}){
                       {block_list[detailcnt].des5 ? "YES" : "NO"}
                       
                       <br></br>
-<<<<<<< HEAD
-                      <br></br>
-                      <label htmlFor="feInputAddress2">6. 충전부는 충분한 절연효과가 있는 방호망이나 절연덮개를 설치하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des6 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">7. 분전반 등 전기 기계·기구의 금속제 외함, 금속제 외피 및 철대는 접지를 실시하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des7 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">8. 배선 또는 이동전선의 절연피복이 손상되거나 노화됨으로 인한 감전의 위험을 방지하기 위한 조치를 하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des8 ? "YES" : "NO"}
-                      
-                      <br></br>
-<<<<<<< HEAD
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
-                      <br></br>
-                      <label htmlFor="feInputAddress2">9. 습윤한 장소의 이동전선 및 부속 접속기구는 충분한 절연효과가 있는 것을 사용하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des9 ? "YES" : "NO"}
-                      
-                      <br></br>
-=======
-                      <br></br>
-=======
                       <br></br>
                       <label htmlFor="feInputAddress2">6. 충전부는 충분한 절연효과가 있는 방호망이나 절연덮개를 설치하였다.</label>
                       <br></br>
@@ -286,16 +234,11 @@ function All({transactionInstance}){
                       
                       <br></br>
                       <br></br>
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
                       <label htmlFor="feInputAddress2">9. 습윤한 장소의 이동전선 및 부속 접속기구는 충분한 절연효과가 있는 것을 사용하였다.</label>
                       <br></br>
                       {block_list[detailcnt].des9 ? "YES" : "NO"}
                       
                       <br></br>
-<<<<<<< HEAD
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
-=======
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
                       <br></br>
                       <label htmlFor="feInputAddress2">10. 통로바닥에 전선 또는 이동전선 등을 설치하여 사용하지 않도록 관리하였다.</label>
                       <br></br>
@@ -323,18 +266,8 @@ function All({transactionInstance}){
           </Row>
         )
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
-=======
-
-
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
       else if(block_list[detailcnt].checktype == "Welding"){
 
         return (
@@ -365,8 +298,6 @@ function All({transactionInstance}){
                         <br></br>
                       {block_list[detailcnt].des1 ? "YES" : "NO"}
                       
-<<<<<<< HEAD
-<<<<<<< HEAD
                       <br></br>
                       <br></br>
                       <label htmlFor="feInputAddress2">2. 작업장 내 위험물, 가연물의 사용·보관 현황을 파악하였다.</label>
@@ -401,78 +332,6 @@ function All({transactionInstance}){
                       <br></br>
                       <label htmlFor="feInputAddress2">7. 화재위험작업 대상 작업자에게 특별안전보건교육을 실시하였다.</label>
                       <br></br>
-=======
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">2. 작업장 내 위험물, 가연물의 사용·보관 현황을 파악하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des2 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">3. 위험물질로 인한 응급상황이 발생했을 때 필요한 행동에 대한 정보를 미리 준비하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des3 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">4. 작업현장에 허가받은 위험물의 종류별 기준량 이상이 되면 지역 소방기관과 관계기관에 신고하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des4 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">5. 소방서로부터 허가받은 위험물 제조소 또는 저장소 자료를 토대로 현장에 위험물의 종류별로 기준 이상의 위험물이 존재하거나 앞으로 존재하게 될 것인지의 여부를 판단하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des5 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">6. 작업자에 대해 화재예방 및 피난 교육 등을 실시하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des6 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">7. 화재위험작업 대상 작업자에게 특별안전보건교육을 실시하였다.</label>
-                      <br></br>
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
-=======
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">2. 작업장 내 위험물, 가연물의 사용·보관 현황을 파악하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des2 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">3. 위험물질로 인한 응급상황이 발생했을 때 필요한 행동에 대한 정보를 미리 준비하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des3 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">4. 작업현장에 허가받은 위험물의 종류별 기준량 이상이 되면 지역 소방기관과 관계기관에 신고하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des4 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">5. 소방서로부터 허가받은 위험물 제조소 또는 저장소 자료를 토대로 현장에 위험물의 종류별로 기준 이상의 위험물이 존재하거나 앞으로 존재하게 될 것인지의 여부를 판단하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des5 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">6. 작업자에 대해 화재예방 및 피난 교육 등을 실시하였다.</label>
-                      <br></br>
-                      {block_list[detailcnt].des6 ? "YES" : "NO"}
-                      
-                      <br></br>
-                      <br></br>
-                      <label htmlFor="feInputAddress2">7. 화재위험작업 대상 작업자에게 특별안전보건교육을 실시하였다.</label>
-                      <br></br>
->>>>>>> aa24fd7a3d5280d42dfa0f34a589e5338bccac8e
                       {block_list[detailcnt].des7 ? "YES" : "NO"}
                       
                       <br></br>
@@ -691,6 +550,8 @@ function All({transactionInstance}){
 
 
   const nextId = useRef(1);
+
+  
   
   
   useEffect(() => {
@@ -718,7 +579,9 @@ function All({transactionInstance}){
             category : events[i].returnValues.category.toString(),
             name : events[i].returnValues.name.toString(),
             // time : time_,
-            time : time_.toString(), 
+            // time : time_.toString(), 
+            time : parseInt(events[i].returnValues.time), 
+            real_time : time_.toString(),
             ipfsHash : fileurl,
             registrant : events[i].returnValues.registrant.toString(),
             responsible : events[i].returnValues.responsible_manager.toString(),
@@ -757,7 +620,9 @@ function All({transactionInstance}){
             category : events_[i].returnValues.category.toString(),
             checktype : events_[i].returnValues.checktype.toString(),
             // time : time_,
-            time : time_.toString(), 
+            // time : time_.toString(), 
+            time : parseInt(events[i].returnValues.time), 
+            real_time : time_.toString(),
             des1 : temp_des[0],
             des2 : temp_des[1],
             des3 : temp_des[2],
@@ -782,30 +647,25 @@ function All({transactionInstance}){
         
         let i, j;
 
-        // for(i = 0; i < block_list.length; i++){
+        for(i = 0; i < block_list.length; i++){
           
-        //   let temp_list;
-        //   let temp_list_cnt = -1;
+          let temp_list;
+          let temp_list_cnt = -1;
 
-        //   for(j = i+1; j < block_list.length; j++){
-        //     if(block_list[i].time._i < block_list[j].time._i){
-        //       temp_list = block_list[j];
-        //       temp_list_cnt = j;
-        //     }
-        //   }
+          for(j = i+1; j < block_list.length; j++){
+            if(block_list[i].time < block_list[j].time){
+              temp_list = block_list[j];
+              temp_list_cnt = j;
+            }
+          }
 
-        //   if(temp_list_cnt != -1){
-        //     block_list[temp_list_cnt] = block_list[i];
-        //     block_list[i] = temp_list;
-        //   }
+          if(temp_list_cnt != -1){
+            block_list[temp_list_cnt] = block_list[i];
+            block_list[i] = temp_list;
+          }
 
-        // }
+        }
         
-        // for(i = 0; i < block_list.length; i++){
-          
-        //   block_list.time = block_list.time.toString();
-
-        // }
 
         setLoading(true);
         setFirst(true);
@@ -880,4 +740,3 @@ function All({transactionInstance}){
 }
 
 export default All;
-

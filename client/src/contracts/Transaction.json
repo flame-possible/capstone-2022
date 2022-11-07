@@ -19402,10 +19402,16 @@
       "links": {},
       "address": "0x115A2bE3E5435173bEF641B7d0f34b11B8799bEa",
       "transactionHash": "0x5d9523186cbcb5042b5c411a616fc4b42a7bec701259c46adcec96baca37b172"
+    },
+    "1667842499411": {
+      "events": {},
+      "links": {},
+      "address": "0x41d8a26DcB0f3B6A041e97Cd0990F899928194e0",
+      "transactionHash": "0x317e0b7e5004c276e7099b796248c739b2d5ef105239ff17d46a1321c3755cb6"
     }
   },
   "schemaVersion": "3.4.8",
-  "updatedAt": "2022-11-07T15:55:58.522Z",
+  "updatedAt": "2022-11-07T17:35:21.370Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
