@@ -84,6 +84,38 @@ export default class UserActions extends React.Component {
               </NavItem>
               )
     }
+    else if (sessionStorage.getItem('user_id') == 'aaa'){
+      return (<NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
+                <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
+                  <span className="d-none d-md-inline-block">{sessionStorage.getItem('user_id')}</span>
+                </DropdownToggle>
+                <Collapse tag={DropdownMenu} right small open={this.state.visible}>
+                  <DropdownItem onClick={this.log_out} className="text-danger">
+                    <i className="material-icons text-danger">&#xE879;</i> Logout
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/rejectedTransaction">
+                    <i className="material-icons text-danger">notifications</i> 알람
+                  </DropdownItem>
+                </Collapse>
+              </NavItem>
+              )
+    }
+    else if (sessionStorage.getItem('user_id') == 'bbb'){
+      return (<NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
+                <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
+                  <span className="d-none d-md-inline-block">{sessionStorage.getItem('user_id')}</span>
+                </DropdownToggle>
+                <Collapse tag={DropdownMenu} right small open={this.state.visible}>
+                  <DropdownItem onClick={this.log_out} className="text-danger">
+                    <i className="material-icons text-danger">&#xE879;</i> Logout
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/grantTransaction">
+                    <i className="material-icons text-danger">notifications</i> 알람
+                  </DropdownItem>
+                </Collapse>
+              </NavItem>
+              )
+    }
     else {
       return (<NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
                   <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">

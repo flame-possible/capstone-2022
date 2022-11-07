@@ -199,6 +199,8 @@ import Temp from "./components/pages/Temp";
 import CheckList from "./components/pages/CheckList";
 import Documents from "./components/pages/Documents";
 import Admin from "./components/pages/Admin"
+import RejectedTransaction from "./components/pages/RejectedTransaction"
+import GrantTransaction from "./components/pages/GrantTransaction"
 
 import { Container, Row, Col } from "shards-react";
 import MainNavbar from "./components/layout/MainNavbar/MainNavbar";
@@ -240,6 +242,8 @@ export default function App({block_list, transactionInstance, account}) {
               <Route path="/ray" element={<Ray transactionInstance={transactionInstance}/>} />
               <Route path="/writetransaction" element={<WriteTransaction transactionInstance={transactionInstance} account={account} />}/>
               <Route path="/admin" element={<Admin transactionInstance={transactionInstance}/>} />
+              <Route path="/rejectedTransaction" element={<RejectedTransaction transactionInstance={transactionInstance}/>} />
+              <Route path="/grantTransaction" element={<GrantTransaction transactionInstance={transactionInstance}/>} />
             </Routes>
             <br></br><br></br>
             {<MainFooter />}
