@@ -740,4 +740,3 @@ function All({transactionInstance}){
 }
 
 export default All;
-
