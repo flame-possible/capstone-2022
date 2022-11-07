@@ -65,7 +65,7 @@ function All({transactionInstance}){
                 <td>{child[i].responsible}</td>
                 <td>{child[i].filetype}</td>
                 <td>{child[i].filedes}</td>
-                <td>{child[i].time}</td>
+                <td>{child[i].real_time}</td>
               </tr>
               )
           }
@@ -77,7 +77,7 @@ function All({transactionInstance}){
                 <td>{child[i].responsible}</td>
                 <td>{child[i].filetype}</td>
                 <td>{child[i].filedes}</td>
-                <td>{child[i].time}</td>
+                <td>{child[i].real_time}</td>
               </tr>
               )
           }
@@ -550,6 +550,8 @@ function All({transactionInstance}){
 
 
   const nextId = useRef(1);
+
+  
   
   
   useEffect(() => {
@@ -577,7 +579,9 @@ function All({transactionInstance}){
             category : events[i].returnValues.category.toString(),
             name : events[i].returnValues.name.toString(),
             // time : time_,
-            time : time_.toString(), 
+            // time : time_.toString(), 
+            time : parseInt(events[i].returnValues.time), 
+            real_time : time_.toString(),
             ipfsHash : fileurl,
             registrant : events[i].returnValues.registrant.toString(),
             responsible : events[i].returnValues.responsible_manager.toString(),
@@ -616,7 +620,9 @@ function All({transactionInstance}){
             category : events_[i].returnValues.category.toString(),
             checktype : events_[i].returnValues.checktype.toString(),
             // time : time_,
-            time : time_.toString(), 
+            // time : time_.toString(), 
+            time : parseInt(events[i].returnValues.time), 
+            real_time : time_.toString(),
             des1 : temp_des[0],
             des2 : temp_des[1],
             des3 : temp_des[2],
@@ -641,30 +647,25 @@ function All({transactionInstance}){
         
         let i, j;
 
-        // for(i = 0; i < block_list.length; i++){
+        for(i = 0; i < block_list.length; i++){
           
-        //   let temp_list;
-        //   let temp_list_cnt = -1;
+          let temp_list;
+          let temp_list_cnt = -1;
 
-        //   for(j = i+1; j < block_list.length; j++){
-        //     if(block_list[i].time._i < block_list[j].time._i){
-        //       temp_list = block_list[j];
-        //       temp_list_cnt = j;
-        //     }
-        //   }
+          for(j = i+1; j < block_list.length; j++){
+            if(block_list[i].time < block_list[j].time){
+              temp_list = block_list[j];
+              temp_list_cnt = j;
+            }
+          }
 
-        //   if(temp_list_cnt != -1){
-        //     block_list[temp_list_cnt] = block_list[i];
-        //     block_list[i] = temp_list;
-        //   }
+          if(temp_list_cnt != -1){
+            block_list[temp_list_cnt] = block_list[i];
+            block_list[i] = temp_list;
+          }
 
-        // }
+        }
         
-        // for(i = 0; i < block_list.length; i++){
-          
-        //   block_list.time = block_list.time.toString();
-
-        // }
 
         setLoading(true);
         setFirst(true);
