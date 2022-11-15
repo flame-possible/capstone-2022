@@ -16,6 +16,8 @@ import {
 } from "shards-react";
 
 
+import CryptoJS from 'crypto-js'
+
 function All({transactionInstance}){
   
   const [limit, setLimit] = useState(10);
@@ -569,10 +571,20 @@ function All({transactionInstance}){
         for(let i = events.length - 1; i >= 0; i--){
           
           var time_ = moment.unix(events[i].returnValues.time);
-          var fileurl = 'https://ipfs.infura.io/ipfs/';
-          fileurl += events[i].returnValues.ipfs_hash.toString();
+
+          const crypto = require('crypto');
+
+          const algo = 'aes-256-cbc';
+          const key = 'abcdefghijklmnopqrstuvwxyz123456';
+          const iv = '1234567890123456';
           
-          console.log(fileurl)
+          const decipher = crypto.createDecipheriv(algo, key, iv);
+          let result2 = decipher.update(events[i].returnValues.ipfs_hash, 'base64', 'utf8');
+          result2 += decipher.final('utf8');
+          console.log('복호화:', result2);
+          
+
+          
           
           block_list.push({
             id: nextId.current,
@@ -582,7 +594,7 @@ function All({transactionInstance}){
             // time : time_.toString(), 
             time : parseInt(events[i].returnValues.time), 
             real_time : time_.toString(),
-            ipfsHash : fileurl,
+            ipfsHash : result2,
             registrant : events[i].returnValues.registrant.toString(),
             responsible : events[i].returnValues.responsible_manager.toString(),
             filetype : events[i].returnValues.file_type.toString(),

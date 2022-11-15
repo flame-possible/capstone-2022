@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "crypto-js": "^4.1.1",
     "flux": "^4.0.3",
     "ganache-cli": "^6.12.2",
     "ipfs-http-client": "^56.0.3",

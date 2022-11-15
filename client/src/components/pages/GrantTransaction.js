@@ -17,6 +17,7 @@ import {
 } from "shards-react";
 
 import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
 function GrantTransaction({transactionInstance, account}){
   
@@ -45,7 +46,22 @@ function GrantTransaction({transactionInstance, account}){
   // send 전자문서 블록체인
   const sendTransaction = async (e) => {
 
-    await transactionInstance.sendTrans(block_list[detailcnt].category, block_list[detailcnt].name, block_list[detailcnt].ipfsHash, block_list[detailcnt].registrant, block_list[detailcnt].responsible, block_list[detailcnt].file_type, block_list[detailcnt].file_des,{
+    let encrypted_ipfs_hash = CryptoJS.AES.encrypt(block_list[detailcnt].ipfsHash, "0123456789ABCDEF");
+
+    const crypto = require('crypto');
+
+    const algo = 'aes-256-cbc';
+    const key = 'abcdefghijklmnopqrstuvwxyz123456';
+    const iv = '1234567890123456';
+
+    const cipher = crypto.createCipheriv(algo, key, iv);
+    let result = cipher.update(block_list[detailcnt].ipfsHash, 'utf8', 'base64');
+    result += cipher.final('base64');
+    console.log('암호화:', result);
+
+
+
+    await transactionInstance.sendTrans(block_list[detailcnt].category, block_list[detailcnt].name, result, block_list[detailcnt].registrant, block_list[detailcnt].responsible, block_list[detailcnt].file_type, block_list[detailcnt].file_des,{
       from: account,
       //value: e.web3.utils.toWei('10', "ether"),
       gas: 1000000

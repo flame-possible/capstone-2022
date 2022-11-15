@@ -19,6 +19,7 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 
 
 import Axios from 'axios';
+import CryptoJS from 'crypto-js'
 
 // const ipfsClient = require('ipfs-http-client');
 
@@ -58,7 +59,6 @@ function CompleteFormExample({transactionInstance, account}){
   const [uploaded, setUploaded] = useState(false)
 
   const [des, setdes] = useState([0]);
-
 
   const uploadFile = async (e) => {
     // setLoading(true)
@@ -110,7 +110,8 @@ const preUpload = (e) => {
       //value: e.web3.utils.toWei('10', "ether"),
       gas: 1000000
     })
-    
+
+
     let events = await transactionInstance.getPastEvents('handleTransaction', {fromBlock: 0, toBlock:'latest'});
     console.log(events[events.length-1].transactionHash)
     //this.updateAllTransactions();
@@ -597,5 +598,6 @@ const preUpload = (e) => {
     </ListGroup>
   )
                 };
+
 
 export default CompleteFormExample;

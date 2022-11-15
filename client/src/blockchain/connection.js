@@ -9,6 +9,7 @@ import axios from 'axios';
 import App from '../App.jsx';
 
 
+import CryptoJS from 'crypto-js'
 
 export default function Connection() {
   // const [fileUrl, setFileUrl] = useState("");
@@ -153,7 +154,22 @@ export default function Connection() {
           let Filedes = "Sector 1 "
           Filedes += res.data[i].time
 
-          await transactionInstance.sendTrans("CCTV", Filename, res.data[i].ipfs_hash, Regsitrant, Responsible, "avi", Filedes,{
+          
+
+          
+          const crypto = require('crypto');
+
+          const algo = 'aes-256-cbc';
+          const key = 'abcdefghijklmnopqrstuvwxyz123456';
+          const iv = '1234567890123456';
+
+          const cipher = crypto.createCipheriv(algo, key, iv);
+          let result = cipher.update(res.data[i].ipfs_hash, 'utf8', 'base64');
+          result += cipher.final('base64');
+          console.log('암호화:', result);
+          
+
+          await transactionInstance.sendTrans("CCTV", Filename, result, Regsitrant, Responsible, "avi", Filedes,{
             from: account,
             //value: e.web3.utils.toWei('10', "ether"),
             gas: 1000000
