@@ -180,7 +180,7 @@ export default function Connection() {
       .catch()
 
       
-      axios.post('http://localhost:3001/sendhumid', null, {
+      axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/sendhumid', null, {
         params: {
         }
       })
