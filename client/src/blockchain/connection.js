@@ -179,6 +179,52 @@ export default function Connection() {
       })
       .catch()
 
+      
+      axios.post('http://localhost:3001/sendhumid', null, {
+        params: {
+        }
+      })
+      .then(async res => {
+        console.log(res)
+
+        let Regsitrant = "Kim"
+        let Responsible = "Kim"
+
+
+        for(let i = 0; i < res.data.length; i++){
+          
+          
+          let Filename = "Sector 1 "
+          Filename += res.data[i].time
+          let Filedes = "Sector 1 "
+          Filedes += res.data[i].time
+
+          
+
+          
+          const crypto = require('crypto');
+
+          const algo = 'aes-256-cbc';
+          const key = 'abcdefghijklmnopqrstuvwxyz123456';
+          const iv = '1234567890123456';
+
+          const cipher = crypto.createCipheriv(algo, key, iv);
+          let result = cipher.update(res.data[i].hash, 'utf8', 'base64');
+          result += cipher.final('base64');
+          console.log('암호화:', result);
+          
+
+          await transactionInstance.sendTrans("Temp", Filename, result, Regsitrant, Responsible, "csv", Filedes,{
+            from: account,
+            //value: e.web3.utils.toWei('10', "ether"),
+            gas: 1000000
+          })
+        }
+
+      })
+      .catch()
+
+
 
 
       updateAllTransactions();

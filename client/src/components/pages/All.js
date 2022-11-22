@@ -584,7 +584,10 @@ function All({transactionInstance}){
           console.log('복호화:', result2);
           
 
-          
+          if(events[i].returnValues.category.toString() == "CCTV" || events[i].returnValues.category.toString() == "Temp"){
+
+            result2 = "https://infura-ipfs.io/ipfs/" + result2;
+          }
           
           block_list.push({
             id: nextId.current,

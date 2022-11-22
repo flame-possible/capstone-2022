@@ -234,13 +234,15 @@ function CCTVList({transactionInstance}){
           let result2 = decipher.update(events[i].returnValues.ipfs_hash, 'base64', 'utf8');
           result2 += decipher.final('utf8');
           console.log('복호화:', result2);
+
+          const url = "https://infura-ipfs.io/ipfs/" + result2;
           
           block_list.push({
             id: nextId.current,
             category : events[i].returnValues.category.toString(),
             name : events[i].returnValues.name.toString(),
             time : time_.toString(), 
-            ipfsHash : result2,
+            ipfsHash : url,
             registrant : events[i].returnValues.registrant.toString(),
             responsible : events[i].returnValues.responsible_manager.toString(),
             filetype : events[i].returnValues.file_type.toString(),

@@ -129,6 +129,20 @@ app.post('/sendCCTV', (req, res) => {
     })
 });
 
+app.post('/sendhumid', (req, res) => {
+    // console.log(`= = = > req : ${util.inspect(req)}`)
+    const sql1 = 'SELECT * FROM hum_tem'
+    db.query(sql1, (err, data) => {
+        if(!err) {
+            const sql2 = 'DELETE FROM hum_tem'
+            db.query(sql2, (err) => {})
+            res.send(data)
+        } else {
+            res.send(err)
+        }
+    })
+});
+
 app.post("/api/insert_check", (req, res)=>{
     const request_user = req.query.request_user;
     const receive_user = req.query.receive_user;
