@@ -40,14 +40,14 @@ export default class UserActions extends React.Component {
       visible: !this.state.visible
     });
 
-    axios.get('http://localhost:3001/api/check_request_num')
+    axios.get('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/check_request_num')
     .then(response => {
       
       const posts = response.data[0].total;
       this.setState({ totalReactPackages: posts });
     });
     
-    axios.get('http://localhost:3001/api/check_receive_num')
+    axios.get('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/check_receive_num')
     .then(response => {
       
       const posts = response.data[0].total;

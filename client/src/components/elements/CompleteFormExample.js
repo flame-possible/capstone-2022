@@ -153,7 +153,7 @@ const preUpload = (e) => {
     
     var fileurl = 'https://ipfs.infura.io/ipfs/' + ipfsHash;
 
-    Axios.post('http://localhost:3001/api/insert_docu', null, {
+    Axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/insert_docu', null, {
         params: {
         'request_user': sessionStorage.getItem('user_id'),
         'receive_user': "bbb",
@@ -185,7 +185,7 @@ const preUpload = (e) => {
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
     
 
-    Axios.post('http://localhost:3001/api/insert_check', null, {
+    Axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/insert_check', null, {
         params: {
         'request_user': sessionStorage.getItem('user_id'),
         'receive_user': "bbb",

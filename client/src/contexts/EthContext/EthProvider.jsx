@@ -9,7 +9,7 @@ function EthProvider({ children }) {
   const init = useCallback(
     async artifact => {
       if (artifact) {
-        const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+        const web3 = new Web3(Web3.givenProvider || "ws://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:8545");
         const accounts = await web3.eth.requestAccounts();
         const networkID = await web3.eth.net.getId();
         const { abi } = artifact;

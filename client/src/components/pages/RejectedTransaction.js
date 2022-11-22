@@ -36,7 +36,7 @@ function RejectedTransaction({transactionInstance, account}){
     setDetailcnt(cnt);
     if (block_list[cnt].request_user_check == 1 && block_list[cnt].receive_user_check == 1){
       
-      axios.post('http://localhost:3001/api/request_check_alarm', null, {
+      axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/request_check_alarm', null, {
         
         params: {
           'time_stamp': block_list[cnt].time_stamp
@@ -65,7 +65,7 @@ function RejectedTransaction({transactionInstance, account}){
       gas: 1000000
     })
     
-    axios.post('http://localhost:3001/api/success_request', null, {
+    axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/success_request', null, {
       
       params: {
         'time_stamp': block_list[detailcnt].time_stamp
@@ -106,7 +106,7 @@ function RejectedTransaction({transactionInstance, account}){
       gas: 1000000
     })
     
-    axios.post('http://localhost:3001/api/success_request', null, {
+    axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/success_request', null, {
       
       params: {
         'time_stamp': block_list[detailcnt].time_stamp
@@ -131,7 +131,7 @@ function RejectedTransaction({transactionInstance, account}){
   const fail_to_upload = async (e) => {
 
     
-    axios.post('http://localhost:3001/api/fail_request', null, {
+    axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/fail_request', null, {
       
       params: {
         'comment': comment,
@@ -727,7 +727,7 @@ function RejectedTransaction({transactionInstance, account}){
 
 
     
-        await axios.post('http://localhost:3001/api/select_request', null, {
+        await axios.post('http://ec2-52-78-43-195.ap-northeast-2.compute.amazonaws.com:3001/api/select_request', null, {
           params: {
           }
         })
