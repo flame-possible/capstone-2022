@@ -151,7 +151,7 @@ const preUpload = (e) => {
       temp += target[i];
     }
     
-    var fileurl = 'https://ipfs.infura.io/ipfs/' + ipfsHash;
+    var fileurl = 'https://infura-ipfs.io/ipfs/' + ipfsHash;
 
     Axios.post('http://localhost:3001/api/insert_docu', null, {
         params: {

@@ -216,26 +216,39 @@ function TempList({transactionInstance}){
         console.log(transactionInstance)
         let events = await transactionInstance.getPastEvents('tempTransaction', {fromBlock:0, toBlock:'latest'});
         
-  
-  
+
+        
         for(let i = events.length - 1; i >= 0; i--){
           
           var time_ = moment.unix(events[i].returnValues.time);
-          var fileurl = 'https://ipfs.infura.io/ipfs/';
-          fileurl += events[i].returnValues.ipfs_hash.toString();
+          
+          const crypto = require('crypto');
+
+          const algo = 'aes-256-cbc';
+          const key = 'abcdefghijklmnopqrstuvwxyz123456';
+          const iv = '1234567890123456';
+          
+          const decipher = crypto.createDecipheriv(algo, key, iv);
+          let result2 = decipher.update(events[i].returnValues.ipfs_hash, 'base64', 'utf8');
+          result2 += decipher.final('utf8');
+          console.log('복호화:', result2);
+
+          const url = "https://infura-ipfs.io/ipfs/" + result2;
           
           block_list.push({
             id: nextId.current,
             category : events[i].returnValues.category.toString(),
             name : events[i].returnValues.name.toString(),
             time : time_.toString(), 
-            ipfsHash : fileurl,
+            ipfsHash : url,
             registrant : events[i].returnValues.registrant.toString(),
             responsible : events[i].returnValues.responsible_manager.toString(),
             filetype : events[i].returnValues.file_type.toString(),
             filedes : events[i].returnValues.file_description.toString()
           }
           )
+  
+  
           
           nextId.current += 1;
   
